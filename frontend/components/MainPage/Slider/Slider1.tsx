@@ -16,6 +16,8 @@ const App = (props: Slider1Props) => {
     //get window width
     const windowWidth = Dimensions.get('window').width;
 
+    console.log('Window Width:', windowWidth);
+
     //get image Asset from source
     const frontAsset = Asset.fromURI(props.frontSource);
     const backAsset = Asset.fromURI(props.backSource);
@@ -61,8 +63,8 @@ const App = (props: Slider1Props) => {
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (_, gestureState) => {
             let newPos = gestureState.moveX;
-            if (newPos < offset) newPos = offset;
-            if (newPos > imageWidth + offset) newPos = imageWidth + offset;
+            if (newPos < (offset + (windowWidth/200))) newPos = offset + (windowWidth/200);
+            if (newPos > (imageWidth + offset - (windowWidth/200))) newPos = imageWidth + offset - (windowWidth/200);
             setSliderPosition(newPos - offset);
             // console.log(newPos);
         },
