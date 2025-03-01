@@ -5,7 +5,12 @@ from PIL import Image as im
 import rasterio
 from osgeo import gdal, ogr
 
-img=cv2.imread("C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg")
+img = cv2.imread("C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg")
+
+img = img[:150, :150]
+
+# Convert BGR to RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
  
@@ -13,23 +18,24 @@ path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\up
  
 sr.readModel(path)
  
-sr.setModel("edsr",4)
+sr.setModel("edsr", 4)
  
-result = sr.upsample(img)
+result = sr.upsample(img_rgb)
 
-result_image = im.fromarray(result) 
-original_image = im.fromarray(img)
-saved = result_image.save("upscaling\EDSR_upscaled_satellite.png")
+result_image = im.fromarray(result)
+original_image = im.fromarray(img_rgb)
+result_image.save("upscaling\\EDSR_upscaled_satellite.png")
+original_image.save("upscaling\\original_satellite.png")
 
-plt.figure(figsize=(10,4))
-plt.subplot(1,3,1)
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 3, 1)
 # Original image
-plt.imshow(img[:,:,::-1])
-plt.subplot(1,3,2)
+plt.imshow(img_rgb)
+plt.subplot(1, 3, 2)
 # SR upscaled
-plt.imshow(result[:,:,::-1])
-# plt.savefig("LapSRN_upscaled_satellite_plot.png", bbox_inches='tight', dpi='figure')
+plt.imshow(result)
 plt.show()
+
 
 """ ALL FOR TIF
 # Open the GeoTIFF file
