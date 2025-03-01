@@ -14,8 +14,8 @@ export default function Map() {
         <div style={styles.slider}>
             <Slider1 
                 testText = {"this is a test"} 
-                frontSource={'../assets/assets/images/mapBack.png'} 
-                backSource={'../assets/assets/images/mapFront.png'} 
+                frontSource={'../assets/assets/images/map_after.png'} 
+                backSource={'../assets/assets/images/map_before.png'} 
             />
         </div>
         <MapButtonsColumn columnTitle='Right Image' />

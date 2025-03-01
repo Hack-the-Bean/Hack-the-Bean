@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
+        width: '100%',
     },
     sliderContainer: {
         display: 'flex',
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         left: 0,
+        width: '100%',
     },
     overlay: {
         display: 'flex',
