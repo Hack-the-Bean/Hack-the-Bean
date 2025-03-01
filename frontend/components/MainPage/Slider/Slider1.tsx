@@ -50,10 +50,13 @@ const App = (props: Slider1Props) => {
     const frontURI = frontAsset.uri;
     const backURI = backAsset.uri;
 
+    //set offset for slider
     var offset = (windowWidth - imageWidth) / 2;
 
+    //set slider position
     const [sliderPosition, setSliderPosition] = useState(imageWidth / 2);
 
+    //create panResponder for slider
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (_, gestureState) => {
@@ -84,7 +87,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
     },
     sliderContainer: {
         position: 'relative',

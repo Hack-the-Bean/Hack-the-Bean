@@ -5,6 +5,7 @@ import {
   StyleSheet
 } from "react-native";
 import Map from "@/components/MainPage/Map/Map";
+import Slider1 from "@/components/MainPage/Slider/Slider1";
 
 export default function Index() {
   return (
@@ -12,6 +13,7 @@ export default function Index() {
       style={[styles.root]}
     >
       <Map />
+      <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
     </View>
   );
 };
