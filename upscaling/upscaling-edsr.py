@@ -19,7 +19,7 @@ result = sr.upsample(img)
 
 result_image = im.fromarray(result) 
 original_image = im.fromarray(img)
-saved = result_image.save("upscaling\EDSR_upscaled_satellite.jpg")
+saved = result_image.save("upscaling\EDSR_upscaled_satellite.png")
 
 plt.figure(figsize=(10,4))
 plt.subplot(1,3,1)
