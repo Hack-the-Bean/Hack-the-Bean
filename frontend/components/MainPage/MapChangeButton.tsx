@@ -24,9 +24,9 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({ onPress, imageSource,
 
     useEffect(() => {
         Animated.timing(scaleAnim, {
-            toValue: isHovered ? 2.1 : 1,
+            toValue: isHovered ? 1.5 : 1,
             duration: 100,
-            easing: Easing.bezier(0.25, 0.1, 0.45, 1.0),
+            easing: Easing.bezier(0.5, 0, 1, 0.5),
             useNativeDriver: true,
         }).start();
     }, [isHovered, scaleAnim]);
