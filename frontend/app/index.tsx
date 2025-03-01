@@ -33,7 +33,6 @@ export default function Index() {
       <MapChangeButton
         onPress={() => console.log("Button pressed")}
         imageSource={require("@/assets/images/icon.png")}
-        style={{ width: 100, height: 100 }}
       />
     </View>
   );

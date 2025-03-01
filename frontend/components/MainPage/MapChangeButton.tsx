@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { 
     TouchableOpacity,
     Animated,
+    Easing,
     Image,
     StyleSheet,
     ViewStyle,
@@ -19,17 +20,28 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({ onPress, imageSource,
     const ref = useRef(null);
     const isHovered = useHover(ref);
 
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+
+    useEffect(() => {
+        Animated.timing(scaleAnim, {
+            toValue: isHovered ? 2.1 : 1,
+            duration: 100,
+            easing: Easing.bezier(0.25, 0.1, 0.45, 1.0),
+            useNativeDriver: true,
+        }).start();
+    }, [isHovered, scaleAnim]);
+
     return (
         <TouchableOpacity
             ref={ref}
             style={[styles.button, style]}
             onPress={onPress}
             activeOpacity={0.7}>
-            <Image
+            <Animated.Image
                 source={imageSource}
                 style={[
                     styles.image,
-                    isHovered && styles.hover,
+                    { transform: [{ scale: scaleAnim }] },
                 ]} />
         </TouchableOpacity>
     );
@@ -41,12 +53,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     image: {
-        width: '100%',
-        height: '100%',
+        width: 100,
+        height: 100,
         borderRadius: 10,
-    },
-    hover: {
-        transform: [{ scale: 1.1 }],
     }
 });
 
