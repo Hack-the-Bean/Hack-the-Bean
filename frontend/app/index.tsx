@@ -12,15 +12,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      {/* <TestParam /> */}
-      <Slider1 />
-      {/* <Text>Edit app/index.tsx to edit this screen.</Text> */}
-      {/* <ImageTest source="@/assets/images/back.png"/> */}
-      {/* <ReactCompareSlider
-        style={{ width: '80%', height: 400 }}
-        itemOne={<ReactCompareSliderImage src={backImage} srcSet="..." />}
-        itemTwo={<ReactCompareSliderImage src={purpleImage} srcSet="..." />}
-      /> */}
+      <Slider1 testText = {"this is a test"} frontSource={'../assets/images/purple.png'} backSource={'../assets/images/back.png'}/>
     </View>
   );
 }
