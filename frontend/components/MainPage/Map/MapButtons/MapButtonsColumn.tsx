@@ -1,17 +1,21 @@
-import { StyleSheet } from "react-native";
+import { 
+    StyleSheet,
+    Text
+} from "react-native";
 import MapChangeButton from "./MapChangeButton";
 
 export default function MapButtonsColumn() {
     return (
         <div style={styles.column}>
-        <MapChangeButton
-            imageSource={require("@/assets/images/icon.png")}
-            onPress={() => console.log("zoom in")}
-        />
-        <MapChangeButton
-            imageSource={require("@/assets/images/icon.png")}
-            onPress={() => console.log("zoom out")}
-        />
+            <Text style={styles.text}>Map Controls</Text>
+            <MapChangeButton
+                imageSource={require("@/assets/images/icon.png")}
+                onPress={() => console.log("zoom in")}
+            />
+            <MapChangeButton
+                imageSource={require("@/assets/images/icon.png")}
+                onPress={() => console.log("zoom out")}
+            />
         </div>
     );
 };
@@ -22,9 +26,15 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        position: "absolute",
+        position: "relative",
         top: 0,
         right: 0,
         margin: 10,
+    },
+    text: {
+        color: "white",
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 10,
     },
 });
