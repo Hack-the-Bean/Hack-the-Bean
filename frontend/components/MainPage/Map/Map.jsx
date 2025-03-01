@@ -9,7 +9,7 @@ export default function Map() {
     >
         <Text style={styles.title}>Map</Text>
         <MapButtonsColumn />
-        <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
+        <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/mapFront.png'} backSource={'../assets/assets/images/mapBack.png'}/>
         <MapButtonsColumn />
     </View>
   );
