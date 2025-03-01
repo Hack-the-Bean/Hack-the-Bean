@@ -19,3 +19,5 @@ thread==2.0.5
 urllib3_secure_extra==0.1.0
 xmlrpclib==1.0.1
 matplotlib==3.10.1
+gdal==3.10.1
+rasterio==1.2.10
