@@ -1,15 +1,38 @@
-import { Text, View } from "react-native";
-import Slider1 from "@/components/Slider1";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet
+} from "react-native";
+import Map from "@/components/MainPage/Map/Map";
+
 export default function Index() {
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      style={[styles.root]}
     >
-      <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
+      <Map />
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  root: {
+    backgroundColor: "#000",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    color: "#fff",
+    fontSize: 20,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    margin: 20,
+  },
+});
