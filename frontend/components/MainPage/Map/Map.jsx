@@ -11,7 +11,9 @@ export default function Map() {
         style={[styles.root]}
     >
         <MapButtonsColumn columnTitle='Left Image' />
-        <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
+        <div style={styles.slider}>
+            <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/mapBack.png'} backSource={'../assets/assets/images/mapFront.png'} />
+        </div>
         <MapButtonsColumn columnTitle='Right Image' />
     </View>
   );
@@ -21,9 +23,11 @@ const styles = StyleSheet.create({
     root: {
         display: 'flex',
         flexDirection: 'row',
-        overflowY: 'scroll',
         height: '50vh',
-        backgroundColor: 'blue'
     },
-    
+    slider: {
+        display: 'flex',
+        justifyContent: 'center',
+        overflowY: 'scroll'
+    }
 })
