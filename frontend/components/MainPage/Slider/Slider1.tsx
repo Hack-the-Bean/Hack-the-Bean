@@ -54,7 +54,7 @@ const App = (props: Slider1Props) => {
     var offset = (windowWidth - imageWidth) / 2;
 
     //set slider position
-    const [sliderPosition, setSliderPosition] = useState(imageWidth / 2);
+    const [sliderPosition, setSliderPosition] = useState((imageWidth+offset) / 2);
 
     //create panResponder for slider
     const panResponder = PanResponder.create({
@@ -84,27 +84,31 @@ const App = (props: Slider1Props) => {
 
 const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        backgroundColor: '#000',
     },
     sliderContainer: {
+        display: 'flex',
         position: 'relative',
         overflow: 'hidden',
     },
     image: {
+        display: 'flex',
         position: 'absolute',
         top: 0,
         left: 0,
     },
     overlay: {
+        display: 'flex',
         position: 'absolute',
         top: 0,
         left: 0,
         overflow: 'hidden',
     },
     slider: {
+        display: 'flex',
         position: 'absolute',
         top: 0,
         width: 20,
