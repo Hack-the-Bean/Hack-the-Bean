@@ -1,5 +1,11 @@
 import { Stack } from "expo-router";
+import NavBar from "@/components/NavBar";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (
+    <>
+      <NavBar />
+      <Stack screenOptions={{ headerShown: false }} />
+    </>
+  )
 }

@@ -1,24 +1,39 @@
-import { Text, View, Image } from "react-native";
-import ImageTest from "@/components/ImageTest";
-import ImageSlider from "@/components/ImageSlider";
-import { CompareSlider } from 'react-native-compare-slider';
+import { Text, View } from "react-native";
+import { Image } from "react-native";
+import MapChangeButton from "@/components/MainPage/MapChangeButton";
 
 export default function Index() {
   return (
     <View
       style={{
+        backgroundColor: "#000",
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <ImageTest />
-      <CompareSlider
-            before={<Image source={require("@/assets/images/back.png")} resizeMode="cover" />}
-            after={<Image source={require("@/assets/images/purple.png")} resizeMode="cover" />}
-            containerStyle={{ width: 300, height: 300 }}
-            />
+      <Text
+        style={{
+          color: "#fff",
+          fontSize: 20,
+          textAlign: "center",
+          marginBottom: 20,
+        }}
+      >
+        Edit app/index.tsx to edit this screen.
+      </Text>
+      <Image
+        source={require("@/assets/images/icon.png")}
+        style={{
+          width: 200,
+          height: 200,
+          margin: 20,
+        }}
+      />
+      <MapChangeButton
+        onPress={() => console.log("Button pressed")}
+        imageSource={require("@/assets/images/icon.png")}
+      />
     </View>
   );
 }
