@@ -5,13 +5,13 @@ import {
   StyleSheet
 } from "react-native";
 import Map from "@/components/MainPage/Map/Map";
-import Slider1 from "@/components/MainPage/Slider/Slider1";
 
 export default function Index() {
   return (
     <View
       style={[styles.root]}
     >
+      <Text style={styles.title}>Map</Text>
       <Map />
     </View>
   );
@@ -36,4 +36,11 @@ const styles = StyleSheet.create({
     height: 200,
     margin: 20,
   },
+  title: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: 'white'
+}
 });

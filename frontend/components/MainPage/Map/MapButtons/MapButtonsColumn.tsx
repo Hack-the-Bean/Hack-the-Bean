@@ -4,10 +4,14 @@ import {
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
 
-export default function MapButtonsColumn() {
+type MapButtonsColumnProps = {
+    columnTitle: string;
+};
+
+export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
     return (
         <div style={styles.column}>
-            <Text style={styles.text}>Map Controls</Text>
+            <Text style={styles.text}>{props.columnTitle}</Text>
             <MapChangeButton
                 imageSource={require("@/assets/images/icon.png")}
                 onPress={() => console.log("zoom in")}
