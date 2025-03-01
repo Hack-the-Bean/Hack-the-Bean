@@ -10,7 +10,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/purple.png'} backSource={'../assets/assets/images/back.png'}/>
+      <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
     </View>
   );
 }
