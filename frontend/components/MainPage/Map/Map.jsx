@@ -21,6 +21,9 @@ const styles = StyleSheet.create({
     root: {
         display: 'flex',
         flexDirection: 'row',
+        overflowY: 'scroll',
+        height: '50vh',
+        backgroundColor: 'blue'
     },
     
 })
