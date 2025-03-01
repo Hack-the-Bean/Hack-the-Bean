@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
     root: {
         display: 'flex',
         flexDirection: 'row',
-        height: '50vh',
+        height: '65vh',
+        top: '1vh',
     },
     slider: {
         display: 'flex',

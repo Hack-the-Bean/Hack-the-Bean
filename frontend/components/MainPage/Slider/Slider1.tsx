@@ -52,7 +52,7 @@ const App = (props: Slider1Props) => {
     const frontURI = frontAsset.uri;
     const backURI = backAsset.uri;
 
-    var heightMod = 0.5;
+    var heightMod = 0.65;
 
     var imgWidth = (windowHeight*heightMod)*(imageWidth/imageHeight);
     var offset = (windowWidth/2) - (imgWidth/2);
