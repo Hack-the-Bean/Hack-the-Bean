@@ -9,6 +9,7 @@ ipython==8.12.3
 ipywidgets==8.1.5
 jnius==1.1.0
 keyring==25.6.0
+matplotlib==3.10.1
 opencv_contrib_python==4.11.0.86
 Pillow==11.1.0
 protobuf==5.29.3
@@ -18,4 +19,3 @@ Sphinx==8.2.1
 thread==2.0.5
 urllib3_secure_extra==0.1.0
 xmlrpclib==1.0.1
-matplotlib==3.10.1
