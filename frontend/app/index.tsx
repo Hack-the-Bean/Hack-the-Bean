@@ -1,5 +1,4 @@
 import { Text, View } from "react-native";
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import Slider1 from "@/components/Slider1";
 export default function Index() {
   return (
