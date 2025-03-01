@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 10,
         overflow: 'hidden',
+        margin: 10,
     },
     image: {
         width: 100,

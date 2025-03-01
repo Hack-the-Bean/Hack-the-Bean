@@ -1,29 +1,17 @@
-import { Text, View } from "react-native";
 import {
+  Text,
+  View,
   Image,
   StyleSheet
 } from "react-native";
-import MapChangeButton from "@/components/MainPage/MapChangeButton";
-import { Header } from "react-native/Libraries/NewAppScreen";
+import Map from "@/components/MainPage/Map/Map";
 
 export default function Index() {
   return (
     <View
       style={[styles.root]}
     >
-      <Text
-        style={[styles.text]}
-      >
-        Edit app/index.tsx to edit this screen.
-      </Text>
-      <Image
-        source={require("@/assets/images/icon.png")}
-        style={[styles.image]}
-      />
-      <MapChangeButton
-        onPress={() => console.log("Button pressed")}
-        imageSource={require("@/assets/images/icon.png")}
-      />
+      <Map />
     </View>
   );
 };
@@ -31,7 +19,8 @@ export default function Index() {
 const styles = StyleSheet.create({
   root: {
     backgroundColor: "#000",
-    flex: 1,
+    display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
   },
