@@ -31,11 +31,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  image: {
-    width: 200,
-    height: 200,
-    margin: 20,
-  },
   title: {
     textAlign: 'center',
     fontSize: 20,

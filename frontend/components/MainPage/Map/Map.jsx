@@ -12,7 +12,11 @@ export default function Map() {
     >
         <MapButtonsColumn columnTitle='Left Image' />
         <div style={styles.slider}>
-            <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/mapBack.png'} backSource={'../assets/assets/images/mapFront.png'} />
+            <Slider1 
+                testText = {"this is a test"} 
+                frontSource={'../assets/assets/images/mapBack.png'} 
+                backSource={'../assets/assets/images/mapFront.png'} 
+            />
         </div>
         <MapButtonsColumn columnTitle='Right Image' />
     </View>
@@ -28,6 +32,7 @@ const styles = StyleSheet.create({
     slider: {
         display: 'flex',
         justifyContent: 'center',
-        overflowY: 'scroll'
+        overflowY: 'scroll',
+        scrollbarWidth: 'none', /* only works on Firefox */
     }
 })
