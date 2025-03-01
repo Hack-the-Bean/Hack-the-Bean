@@ -50,6 +50,8 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({ onPress, imageSource,
 const styles = StyleSheet.create({
     button: {
         borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 1,
         overflow: 'hidden',
         margin: 10,
     },

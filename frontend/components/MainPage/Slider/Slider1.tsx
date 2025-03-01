@@ -54,7 +54,7 @@ const App = (props: Slider1Props) => {
     var offset = (windowWidth - imageWidth) / 2;
 
     //set slider position
-    const [sliderPosition, setSliderPosition] = useState((imageWidth+offset) / 2);
+    const [sliderPosition, setSliderPosition] = useState((imageWidth + offset) / 2);
 
     //create panResponder for slider
     const panResponder = PanResponder.create({
@@ -70,7 +70,7 @@ const App = (props: Slider1Props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontSize: 36, marginBottom: 20 }}>{props.testText}</Text>
+            <Text style={{ fontSize: 36, marginBottom: 20, color: "green" }}>{props.testText}</Text>
             <View style={[styles.sliderContainer, { width: imageWidth, height: imageHeight }]}>
                 <Image source={{ uri: backURI }} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
                 <View style={[styles.overlay, { width: sliderPosition, height: imageHeight }]}>

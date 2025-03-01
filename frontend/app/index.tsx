@@ -13,7 +13,6 @@ export default function Index() {
       style={[styles.root]}
     >
       <Map />
-      <Slider1 testText = {"this is a test"} frontSource={'../assets/assets/images/front.png'} backSource={'../assets/assets/images/back.png'}/>
     </View>
   );
 };
