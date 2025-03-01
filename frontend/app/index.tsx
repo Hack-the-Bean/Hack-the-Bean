@@ -6,12 +6,14 @@ import {
   ScrollView
 } from "react-native";
 import Map from "@/components/MainPage/Map/Map";
+import HeroCarousel from "@/components/MainPage/HeroCarousel/Carousel";
 
 export default function Index() {
   return (
     <ScrollView
       contentContainerStyle={[styles.root]}
     >
+      <HeroCarousel />
       <Text style={styles.title}>Map</Text>
       <Map />
       <Text style={styles.text}>
