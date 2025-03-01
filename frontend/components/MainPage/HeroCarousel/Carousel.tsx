@@ -5,7 +5,8 @@ import {
     Image,
     StyleSheet,
     Animated,
-    Dimensions
+    Dimensions,
+    Easing
 } from "react-native";
 
 const carouselImages = [
@@ -18,23 +19,38 @@ const carouselImages = [
 ];
 
 const { width } = Dimensions.get("window");
-const IMAGE_WIDTH = 1000; // TODO: change to percentage of image width
+const IMAGE_WIDTH = width / 2; // TODO: change to percentage of image width
 
 export default function HeroCarousel() {
     const scrollX = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.loop(
+        
+        const animationSequence = () => {
             Animated.timing(scrollX, {
                 toValue: -IMAGE_WIDTH * carouselImages.length,
-                duration: carouselImages.length * 3000,
+                duration: carouselImages.length * 6000,
+                easing: Easing.linear,
                 useNativeDriver: true,
-                isInteraction: false,
-            })
-        ).start();
+            }).start(() => {
+                scrollX.setValue(0);
+                animationSequence();
+            });
+        };
+
+        animationSequence();
+
+        return () => {
+            scrollX.stopAnimation();
+        };
+
     }, []);
 
-    const duplicatedImages = [...carouselImages, ...carouselImages];
+    const duplicatedImages = [
+        ...carouselImages,
+        ...carouselImages,
+        ...carouselImages
+    ];
     return (
         <View style={styles.heroContainer}>
             <Animated.View
@@ -43,17 +59,7 @@ export default function HeroCarousel() {
                     {
                         transform: [
                             {
-                                translateX: scrollX.interpolate({
-                                    inputRange: [
-                                        -IMAGE_WIDTH * carouselImages.length * 2,
-                                        0
-                                    ],
-                                    outputRange: [
-                                        0,
-                                        -IMAGE_WIDTH * carouselImages.length
-                                    ],
-                                    extrapolate: "clamp"
-                                }),
+                                translateX: scrollX
                             },
                         ],
                     },
@@ -75,7 +81,7 @@ export default function HeroCarousel() {
 
 const styles = StyleSheet.create({
     heroContainer: {
-        height: 1000,
+        height: 800,
         width: "100%",
         position: "relative",
         overflow: "hidden",
