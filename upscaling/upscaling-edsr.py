@@ -43,8 +43,8 @@ result = sr.upsample(img_fused)
 result_image = np.clip(result, 0, 255).astype(np.uint8)
 
 # Save images
-im.fromarray(result_image).save("upscaling\\EDSR_upscaled_satellite.png")
-im.fromarray(img_rgb).save("upscaling\\original_satellite.png")
+im.fromarray(result_image[:650, :650]).save("upscaling\\EDSR_upscaled_satellite_topleft.png")
+im.fromarray(img_rgb[:150, :150]).save("upscaling\\original_satellite_topleft.png")
 
 # Save as GeoTIFF
 with rasterio.open(lidar_path) as src:
@@ -58,10 +58,10 @@ with rasterio.open(lidar_path) as src:
 # Display images
 plt.figure(figsize=(10, 4))
 plt.subplot(1, 2, 1)
-plt.imshow(img_rgb)
+plt.imshow(img_rgb[:150, :150])
 plt.title("Original Image")
 
 plt.subplot(1, 2, 2)
-plt.imshow(result_image)
+plt.imshow(result_image[:650, :650])
 plt.title("Upscaled Image")
 plt.show()
