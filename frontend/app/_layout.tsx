@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <>
       <NavBar />
-      <Stack />
+      <Stack screenOptions={{ headerShown: false }} />
     </>
   )
 }
