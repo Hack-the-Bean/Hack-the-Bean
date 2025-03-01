@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
         top: 0,
         right: 0,
         margin: 10,
+        flex: 1,
     },
     text: {
         color: "white",

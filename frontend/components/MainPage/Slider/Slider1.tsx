@@ -26,6 +26,8 @@ const App = (props: Slider1Props) => {
     //get image width and height
     useEffect(() => {
 
+        var ratio = 0;
+
         // console.log('useEffect called');
 
         //check front image availability then, if they have width and height, set them
@@ -33,16 +35,14 @@ const App = (props: Slider1Props) => {
             if (frontAsset.width !== null && frontAsset.height !== null) {
                 setImageWidth(frontAsset.width);
                 setImageHeight(frontAsset.height);
-            }
-            console.log('Front Width:', frontAsset.width);
-            console.log('Front Height:', frontAsset.height);
+                ratio = frontAsset.height/frontAsset.width;
+            }            
         });
 
         //check back image availability then, if they have width and height, check same
         backAsset.downloadAsync().then(() => {
             if (backAsset.width !== null && backAsset.height !== null) {
-                console.log('Back Width:', backAsset.width, '\nEqual to Front Width:', backAsset.width === frontAsset.width);
-                console.log('Back Height:', backAsset.height, '\nEqual to Front Height:', backAsset.height === frontAsset.height);
+                console.log('Back Equal to Front Ratio:', (backAsset.height/backAsset.width) === ratio, ' : ', ratio);
             }
         });
         

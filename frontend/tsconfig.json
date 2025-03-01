@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "components/MainPage/Map/MapButtons"  ]
+, "components/MainPage/Map/MapButtons", "components/MainPage/Map/Map.jsx"  ]
 }
