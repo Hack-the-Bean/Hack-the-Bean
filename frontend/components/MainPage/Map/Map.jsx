@@ -11,13 +11,13 @@ export default function Map() {
             style={[styles.root]}
         >
             <MapButtonsColumn columnTitle='Left Image' />
-            <div style={styles.slider}>
+            {/* <div style={styles.slider}> */}
                 <Slider1 
                     testText = {"this is a test"} 
-                    backSource={'../assets/assets/images/satellite.png'} 
-                    frontSource={'../assets/assets/images/betterSat.png'} 
+                    backSource={'../assets/assets/images/betterSat.png'} 
+                    frontSource={'../assets/assets/images/satellite.png'} 
                 />
-            </div>
+            {/* </div> */}
             <MapButtonsColumn columnTitle='Right Image' />
         </View>
   );

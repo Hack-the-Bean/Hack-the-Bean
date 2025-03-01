@@ -3,11 +3,12 @@ import {
     TouchableOpacity,
     Animated,
     Easing,
-    Image,
+    View,
     StyleSheet,
     ViewStyle,
     ImageSourcePropType 
 } from 'react-native';
+
 import { useHover } from 'react-native-web-hooks';
 
 interface MapChangeButtonProps {
@@ -32,22 +33,32 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({ onPress, imageSource,
     }, [isHovered, scaleAnim]);
 
     return (
-        <TouchableOpacity
-            ref={ref}
-            style={[styles.button, style]}
-            onPress={onPress}
-            activeOpacity={0.7}>
-            <Animated.Image
-                source={imageSource}
-                style={[
-                    styles.image,
-                    { transform: [{ scale: scaleAnim }] },
-                ]} />
-        </TouchableOpacity>
+        <View 
+            ref={ref} 
+            style={[styles.wrapper]}>
+            <TouchableOpacity
+                style={[styles.button, style]}
+                onPress={onPress}
+                activeOpacity={0.7}>
+                <Animated.Image
+                    source={imageSource}
+                    style={[
+                        styles.image,
+                        { transform: [{ scale: scaleAnim }] },
+                    ]} />
+            </TouchableOpacity>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
+    wrapper: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
     button: {
         borderRadius: 10,
         borderColor: 'white',

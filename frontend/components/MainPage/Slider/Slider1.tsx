@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, PanResponder, StyleSheet, Text, Dimensions } from 'react-native';
+import { View, Image, PanResponder, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Asset } from 'expo-asset';
 
 type Slider1Props = {
@@ -15,8 +15,9 @@ const App = (props: Slider1Props) => {
 
     //get window width
     const windowWidth = Dimensions.get('window').width;
+    const windowHeight = Dimensions.get('window').height;
 
-    console.log('Window Width:', windowWidth);
+    // console.log('App called - Window Width:', windowWidth);
 
     //get image Asset from source
     const frontAsset = Asset.fromURI(props.frontSource);
@@ -24,8 +25,8 @@ const App = (props: Slider1Props) => {
     
     //get image width and height
     useEffect(() => {
-        // const frontAsset = Asset.fromModule(require('../images/purple.png'));
-        // const backAsset = Asset.fromModule(require('../images/back.png'));
+
+        // console.log('useEffect called');
 
         //check front image availability then, if they have width and height, set them
         frontAsset.downloadAsync().then(() => {
@@ -33,8 +34,8 @@ const App = (props: Slider1Props) => {
                 setImageWidth(frontAsset.width);
                 setImageHeight(frontAsset.height);
             }
-            console.log('Width:', frontAsset.width);
-            console.log('Height:', frontAsset.height);
+            console.log('Front Width:', frontAsset.width);
+            console.log('Front Height:', frontAsset.height);
         });
 
         //check back image availability then, if they have width and height, check same
@@ -44,42 +45,53 @@ const App = (props: Slider1Props) => {
                 console.log('Back Height:', backAsset.height, '\nEqual to Front Height:', backAsset.height === frontAsset.height);
             }
         });
-
-
+        
     }, []);
 
     //get image uri
     const frontURI = frontAsset.uri;
     const backURI = backAsset.uri;
 
-    //set offset for slider
-    var offset = (windowWidth - imageWidth) / 2;
+    var heightMod = 0.5;
 
+    var imgWidth = (windowHeight*heightMod)*(imageWidth/imageHeight);
+    var offset = (windowWidth/2) - (imgWidth/2);
+
+    var sliderWidth = (imgWidth) / 40;
+
+    
     //set slider position
-    const [sliderPosition, setSliderPosition] = useState((imageWidth + offset) / 2);
+    const [sliderPosition, setSliderPosition] = useState(imgWidth/2);
+
+    useEffect(() => {
+        if (imgWidth > 0) {
+            setSliderPosition(imgWidth / 2);
+        }
+    }, [imgWidth]);
+    
 
     //create panResponder for slider
     const panResponder = PanResponder.create({
-        onStartShouldSetPanResponder: () => true,
+        onStartShouldSetPanResponder: () => true,        
         onPanResponderMove: (_, gestureState) => {
+            // console.log('WindowWidth:', windowWidth, 'ImageWidth:', imgWidth, 'min', (windowWidth/2) - (imgWidth/2), 'max', (windowWidth/2) + (imgWidth/2));
             let newPos = gestureState.moveX;
-            if (newPos < (offset + (windowWidth/200))) newPos = offset + (windowWidth/200);
-            if (newPos > (imageWidth + offset - (windowWidth/200))) newPos = imageWidth + offset - (windowWidth/200);
-            setSliderPosition(newPos - offset);
-            // console.log(newPos);
+            if (newPos < (offset + (sliderWidth/2))) newPos = (offset + (sliderWidth/2));
+            if (newPos > ((windowWidth/2) + (imgWidth/2) - (sliderWidth/2))) newPos = ((windowWidth/2) + (imgWidth/2) - (sliderWidth/2));
+            setSliderPosition(newPos-offset);
         },
     });
 
     return (
-        <View style={styles.container}>
-            <View style={[styles.sliderContainer, { width: imageWidth, height: imageHeight }]}>
-                <Image source={{ uri: backURI }} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
-                <View style={[styles.overlay, { width: sliderPosition, height: imageHeight }]}>
-                    <Image source={{ uri: frontURI }} style={[styles.image, { width: imageWidth, height: imageHeight }]} />
+        <ScrollView contentContainerStyle={[styles.container]}>
+            <View style={[styles.sliderContainer, { height: windowHeight*heightMod, width: (windowHeight*heightMod)*(imageWidth/imageHeight) }]}>
+                <Image source={{ uri: backURI }} style={[styles.image, { height: windowHeight*heightMod, width: (windowHeight*heightMod)*(imageWidth/imageHeight) }]} />
+                <View style={[styles.overlay, { width: sliderPosition, height: (windowWidth*heightMod) }]}>
+                    <Image source={{ uri: frontURI }} style={[styles.image, { height: windowHeight*heightMod, width: (windowHeight*heightMod)*(imageWidth/imageHeight) }]} />
                 </View>
-                <View {...panResponder.panHandlers} style={[styles.slider, { left: sliderPosition - 10, height: imageHeight }]} />
+                <View {...panResponder.panHandlers} style={[styles.slider, { width: sliderWidth, left: sliderPosition - (sliderWidth/2), height: (windowWidth*0.5) }]} />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -88,18 +100,20 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
         justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        alignItems: 'center',
     },
     sliderContainer: {
         display: 'flex',
         position: 'relative',
         overflow: 'hidden',
+        alignSelf: 'center',
     },
     image: {
         display: 'flex',
         position: 'absolute',
         top: 0,
         left: 0,
+        alignSelf: 'center',
     },
     overlay: {
         display: 'flex',
@@ -107,16 +121,17 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         overflow: 'hidden',
+        alignSelf: 'center',
     },
     slider: {
         display: 'flex',
         position: 'absolute',
         top: 0,
-        width: 20,
-        backgroundColor: 'rgba(255,255,255,0.7)',
+        backgroundColor: 'rgba(255,0,255,0.7)',
         borderColor: '#000',
         borderWidth: 1,
         zIndex: 2,
+        // alignSelf: 'center',
     },
 });
 
