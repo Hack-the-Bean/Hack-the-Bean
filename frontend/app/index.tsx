@@ -1,10 +1,9 @@
 import { Text, View } from "react-native";
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
-
-
+import ImageTest from "@/components/ImageTest";
+import TestParam from "@/components/TestParam";
+import Slider1 from "@/components/Slider1";
 export default function Index() {
-  const backImage = '../assets/images/back.png';
-  const purpleImage = '../assets/images/purple.png';
   return (
     <View
       style={{
@@ -13,13 +12,15 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-
-      <ReactCompareSlider
+      {/* <TestParam /> */}
+      <Slider1 />
+      {/* <Text>Edit app/index.tsx to edit this screen.</Text> */}
+      {/* <ImageTest source="@/assets/images/back.png"/> */}
+      {/* <ReactCompareSlider
         style={{ width: '80%', height: 400 }}
         itemOne={<ReactCompareSliderImage src={backImage} srcSet="..." />}
         itemTwo={<ReactCompareSliderImage src={purpleImage} srcSet="..." />}
-      />
+      /> */}
     </View>
   );
 }
