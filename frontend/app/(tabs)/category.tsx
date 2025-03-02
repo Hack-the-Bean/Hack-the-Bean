@@ -35,7 +35,7 @@ export default function Index() {
     >
       <HeroCarousel />
       <Map />
-      <VideoPlayer />
+      {/* <VideoPlayer /> */}
     </ScrollView>
   );
 };
