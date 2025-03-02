@@ -16,11 +16,14 @@ lidar_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Be
 with rasterio.open(lidar_path) as lidar:
     lidar_data = lidar.read(1)  # Read the first band (elevation)
 
-# Normalize LiDAR data to 0-255
-lidar_data = cv2.normalize(lidar_data, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+# Avoid log(0) or negative values by shifting data
+lidar_data_shifted = np.where(lidar_data <= 0, 1, lidar_data)
+
+# Convert LIDAR data to log scale
+log_lidar_data = np.log2(lidar_data_shifted)  
 
 # Resize LiDAR to match satellite image dimensions
-lidar_resized = cv2.resize(lidar_data, (img_rgb.shape[1], img_rgb.shape[0]))
+lidar_resized = cv2.resize(log_lidar_data, (img_rgb.shape[1], img_rgb.shape[0]))
 
 # **Method 1: Use LiDAR as a Contrast Modifier (Multiply with RGB)**
 # Convert LiDAR to float for processing
@@ -42,8 +45,8 @@ result = sr.upsample(img_fused)
 result_image = np.clip(result, 0, 255).astype(np.uint8)
 
 # Save images
-im.fromarray(result_image[:650, :650]).save("upscaling\\EDSR_upscaled_satellite_topleft.png")
-im.fromarray(img_rgb[:150, :150]).save("upscaling\\original_satellite_topleft.png")
+im.fromarray(result_image).save("upscaling\\EDSR_upscaled_log_2satellite.png")
+im.fromarray(img_rgb).save("upscaling\\original_satellite.png")
 
 # Save as GeoTIFF
 with rasterio.open(lidar_path) as src:
@@ -57,10 +60,10 @@ with rasterio.open(lidar_path) as src:
 # Display images
 plt.figure(figsize=(10, 4))
 plt.subplot(1, 2, 1)
-plt.imshow(img_rgb[:150, :150])
+plt.imshow(img_rgb)
 plt.title("Original Image")
 
 plt.subplot(1, 2, 2)
-plt.imshow(result_image[:650, :650])
+plt.imshow(result_image)
 plt.title("Upscaled Image")
 plt.show()
