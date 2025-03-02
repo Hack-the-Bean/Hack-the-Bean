@@ -35,7 +35,9 @@ export default function Index() {
     >
       <HeroCarousel />
       <Map />
-      {/* <VideoPlayer /> */}
+      <Text style={styles.text}>
+        We were able to create a 3D pointcloud of the area from the LIDAR depth as a third dimension.
+      </Text>
     </ScrollView>
   );
 };
