@@ -1,86 +1,66 @@
 import cv2
 import matplotlib.pyplot as plt
-import numpy as np 
-from PIL import Image as im 
+import numpy as np
+from PIL import Image as im
 import rasterio
-from osgeo import gdal, ogr
 
-img = cv2.imread("C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg")
-
-img = img[:150, :150]
+# Load satellite image
+satellite_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg"
+img = cv2.imread(satellite_path)
 
 # Convert BGR to RGB
 img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
+# Load LiDAR GeoTIFF
+lidar_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\lidar.tif"
+with rasterio.open(lidar_path) as lidar:
+    lidar_data = lidar.read(1)  # Read the first band (elevation)
+
+# Normalize LiDAR data to 0-255
+lidar_data = cv2.normalize(lidar_data, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+
+# Resize LiDAR to match satellite image dimensions
+lidar_resized = cv2.resize(lidar_data, (img_rgb.shape[1], img_rgb.shape[0]))
+
+# **Method 1: Use LiDAR as a Contrast Modifier (Multiply with RGB)**
+# Convert LiDAR to float for processing
+lidar_float = lidar_resized.astype(np.float32) / 255.0
+
+# Enhance RGB with LiDAR (element-wise multiplication)
+img_fused = (img_rgb.astype(np.float32) * (1 + lidar_float[:, :, np.newaxis])).clip(0, 255).astype(np.uint8)
+
+# Load EDSR model
 sr = cv2.dnn_superres.DnnSuperResImpl_create()
- 
-path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\EDSR_x4.pb"
- 
-sr.readModel(path)
- 
+model_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\EDSR_x4.pb"
+sr.readModel(model_path)
 sr.setModel("edsr", 4)
- 
-result = sr.upsample(img_rgb)
 
-result_image = im.fromarray(result)
-original_image = im.fromarray(img_rgb)
-result_image.save("upscaling\\EDSR_upscaled_satellite.png")
-original_image.save("upscaling\\original_satellite.png")
+# Super-resolve image (3-channel required)
+result = sr.upsample(img_fused)
 
+# Convert result to uint8 format
+result_image = np.clip(result, 0, 255).astype(np.uint8)
+
+# Save images
+im.fromarray(result_image[:650, :650]).save("upscaling\\EDSR_upscaled_satellite_topleft.png")
+im.fromarray(img_rgb[:150, :150]).save("upscaling\\original_satellite_topleft.png")
+
+# Save as GeoTIFF
+with rasterio.open(lidar_path) as src:
+    meta = src.meta.copy()
+    meta.update({"height": result_image.shape[0], "width": result_image.shape[1], "count": 3})
+
+    with rasterio.open("upscaling\\upscaled_satellite.tif", "w", **meta) as dest:
+        for i in range(3):  # Save RGB channels
+            dest.write(result_image[:, :, i], i + 1)
+
+# Display images
 plt.figure(figsize=(10, 4))
-plt.subplot(1, 3, 1)
-# Original image
-plt.imshow(img_rgb)
-plt.subplot(1, 3, 2)
-# SR upscaled
-plt.imshow(result)
+plt.subplot(1, 2, 1)
+plt.imshow(img_rgb[:150, :150])
+plt.title("Original Image")
+
+plt.subplot(1, 2, 2)
+plt.imshow(result_image[:650, :650])
+plt.title("Upscaled Image")
 plt.show()
-
-
-""" ALL FOR TIF
-# Open the GeoTIFF file
-with rasterio.open('C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.tif') as dataset:
-    image_data = dataset.read()
-    
-    # Convert image data to a NumPy array suitable for OpenCV
-img = np.moveaxis(image_data, 0, -1)
-
-
-dataset = gdal.Open(r'C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.tif')
-metadata = dataset.GetMetadata()
-
-dataset = dataset[:, :, :3]
-
-
-# since there are 3 bands 
-# we store in 3 different variables 
-band1 = dataset.GetRasterBand(1) # Red channel 
-band2 = dataset.GetRasterBand(2) # Green channel 
-band3 = dataset.GetRasterBand(3) # Blue channel
-
-b1 = band1.ReadAsArray() 
-b2 = band2.ReadAsArray() 
-b3 = band3.ReadAsArray() 
-
-img = np.dstack((b1, b2, b3)) 
-f = plt.figure() 
-plt.imshow(img) 
-plt.savefig('Tiff.png') 
-plt.show() 
-
-# Convert the result back to the original shape for GeoTIFF
-result_geo = np.moveaxis(result, -1, 0)
-
-# Update metadata for the output GeoTIFF
-out_meta = dataset.meta.copy()
-out_meta.update({
-    "driver": "GTiff",
-    "height": result_geo.shape[1],
-    "width": result_geo.shape[2],
-    "count": result_geo.shape[0]
-})
-
-# Save the output as a GeoTIFF
-with rasterio.open('upscaled_satellite.tif', 'w', **out_meta) as dest:
-    dest.write(result_geo)
-"""
