@@ -29,7 +29,7 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({
     const isHovered = useHover(ref);
 
     const scaleAnim = useRef(new Animated.Value(1)).current;
-    const textPositionAnim = useRef(new Animated.Value(30)).current;
+    const textPositionAnim = useRef(new Animated.Value(50)).current;
     const overlayOpacityAnim = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
@@ -41,7 +41,7 @@ const MapChangeButton: React.FC<MapChangeButtonProps> = ({
                 useNativeDriver: true,
             }),
             Animated.timing(textPositionAnim, {
-                toValue: isHovered ? 0 : 30,
+                toValue: isHovered ? 0 : 50,
                 duration: 200,
                 easing: Easing.bezier(0.5, 0, 1, 0.5),
                 useNativeDriver: true
