@@ -7,11 +7,11 @@ import { useState } from 'react';
 
 import MapChangeButton from "./MapChangeButton";
 import icon from "@/assets/images/icon.png";
-import original_satellite from "@/assets/images/original_satellite.png";
-import small from "@/assets/images/small_after.png";
-import lidar from "@/assets/images/lidar_after.png";
-import logged from "@/assets/images/logged_after.png";
-import BIGlogged from "@/assets/images/BIGlogged_after.png";
+import original_satellite from "@/assets/images/scaling/original_satellite.png";
+import small from "@/assets/images/scaling/small_after.png";
+import lidar from "@/assets/images/scaling/lidar_after.png";
+import logged from "@/assets/images/scaling/logged_after.png";
+import BIGlogged from "@/assets/images/scaling/BIGlogged_after.png";
 
 const imageMap: { [key: string]: any } = {
     "icon": icon,

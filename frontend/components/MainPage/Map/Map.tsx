@@ -94,12 +94,13 @@ export default function Map() {
         }
     };
 
-    const handleFrontChange = (newImage: string) => {
+    const handleFrontChange = (newImage: string, back: string) => {
         setFrontSource(newImage);
         setBackList(getTupleFromFrontSource(newImage));
         setNameList(getNamesFromFrontSource(newImage));
         setTextUse(getTextFromFrontSource(newImage));
         setTopText(getTopTextFromFrontSource(newImage));
+        setBackSource(getNamesFromFrontSource(newImage)[0] + '.png');
     };
 
     const handleBackChange = (newImage: string) => {
@@ -129,7 +130,7 @@ export default function Map() {
                 <MapButtonsColumn 
                     columnTitle='Right Image' 
                     nameTuple={nameList} 
-                    imageTuple={backList} 
+                    imageTuple={backList}
                     onImagePress={handleBackChange}
                 />
                 
