@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import Map from "@/components/MainPage/Map/Map";
 import HeroCarousel from "@/components/MainPage/HeroCarousel/Carousel";
-import BoxRender from "@/components/MainPage/Box/Box";
+import BnunnyRender from "@/components/MainPage/Bnunny/Bnunny";
 
 export default function Index() {
   return (
@@ -17,7 +17,7 @@ export default function Index() {
       <HeroCarousel />
       <Text style={styles.title}>Map</Text>
       <Map />
-      <BoxRender />
+      <BnunnyRender />
       {/* <p style={styles.gap}></p> */}
 
       {/* <Text style={styles.text}> */}
