@@ -22,7 +22,7 @@ interface MapChangeButtonProps {
 const MapChangeButton: React.FC<MapChangeButtonProps> = ({
     onPress, 
     imageSource,
-    label = "Select", 
+    label, 
     style 
 }) => {
     const ref = useRef(null);

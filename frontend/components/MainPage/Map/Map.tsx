@@ -32,7 +32,7 @@ export default function Map() {
             </div>
             <MapButtonsColumn 
                 columnTitle='Right Image' 
-                nameTuple={['orange','purple','black','map_after']} 
+                nameTuple={['TEST1','TEST1','TEST1','TEST1']} 
                 imageTuple={['orange','purple','black', 'map_after']} 
                 onImagePress={handleBackChange}
             />

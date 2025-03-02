@@ -5,12 +5,10 @@ import {
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
 import icon from "@/assets/images/icon.png";
-// Add other static imports for images here
 import black from "@/assets/images/black.png";
 import purple from "@/assets/images/purple.png";
 import orange from "@/assets/images/orange.png";
 import map_after from "@/assets/images/map_after.png";
-// ...
 
 const imageMap: { [key: string]: any } = {
     "icon": icon,
@@ -43,6 +41,7 @@ export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
                         console.log(`${name} pressed`);
                         props.onImagePress(props.imageTuple[index] + '.png');
                     }}
+                    label={props.nameTuple[index]}
                 />
             ))}
         </View>
