@@ -39,13 +39,13 @@ sr.readModel(model_path)
 sr.setModel("edsr", 4)
 
 # Super-resolve image (3-channel required)
-result = sr.upsample(img_fused)
+result = sr.upsample(img_rgb)
 
 # Convert result to uint8 format
 result_image = np.clip(result, 0, 255).astype(np.uint8)
 
 # Save images
-im.fromarray(result_image).save("upscaling\\EDSR_upscaled_log_2satellite.png")
+im.fromarray(result_image).save("upscaling\\EDSR_upscaled_4x_satellite.png")
 im.fromarray(img_rgb).save("upscaling\\original_satellite.png")
 
 # Save as GeoTIFF
