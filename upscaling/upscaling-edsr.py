@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image as im
 import rasterio
-from osgeo import gdal
 
 # Load satellite image
 satellite_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg"
