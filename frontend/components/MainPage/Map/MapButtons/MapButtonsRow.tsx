@@ -4,9 +4,25 @@ import {
     View
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
+import icon from "@/assets/images/icon.png";
+import black from "@/assets/images/black.png";
+import purple from "@/assets/images/purple.png";
+import orange from "@/assets/images/orange.png";
+import map_after from "@/assets/images/map_after.png";
+
+const imageMap: { [key: string]: any } = {
+    "icon": icon,
+    "black": black,
+    "purple": purple,
+    "orange": orange,
+    'map_after': map_after,
+};
 
 type MapButtonsColumnProps = {
     rowTitle: string;
+    nameTuple: string[];
+    imageTuple: string[];
+    onImagePress: (image: string) => void;
 };
 
 export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
@@ -15,15 +31,18 @@ export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
             <Text style={styles.text}>{props.rowTitle}</Text>
             <p style={styles.gap}></p>
             <View style={styles.row}>
-                
-                <MapChangeButton
-                    imageSource={require("@/assets/images/icon.png")}
-                    onPress={() => console.log("zoom in")}
-                />
-                <MapChangeButton
-                    imageSource={require("@/assets/images/icon.png")}
-                    onPress={() => console.log("zoom out")}
-                />
+                {props.nameTuple.map((name, index) => (
+                    <MapChangeButton
+                        key={index}
+                        imageSource={imageMap[props.imageTuple[index]] || icon}
+                        onPress={() => {
+                            console.log(`${name} pressed`);
+                            props.onImagePress(props.imageTuple[index] + '_after' + '.png');
+
+                        }}
+                        label={props.nameTuple[index]}
+                    />
+                ))}
             </View>
         </View>
     );

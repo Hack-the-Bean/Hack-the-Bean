@@ -16,10 +16,6 @@ const imageMap: { [key: string]: any } = {
     "purple": purple,
     "orange": orange,
     'map_after': map_after,
-    // Add other mappings here
-    // "image1": image1,
-    // "image2": image2,
-    // ...
 };
 
 type MapButtonsColumnProps = {
