@@ -5,17 +5,34 @@ import {
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
 import icon from "@/assets/images/icon.png";
-import black from "@/assets/images/black.png";
-import purple from "@/assets/images/purple.png";
-import orange from "@/assets/images/orange.png";
-import map_after from "@/assets/images/map_after.png";
+import original_satellite from "@/assets/images/original_satellite.png";
+import front_lidar from "@/assets/images/front_lidar.png";
+import front_nrg from "@/assets/images/front_nrg.png";
+import lidar_basic_threshold from "@/assets/images/lidar_basic_threshold.png";
+import lidar_ground from "@/assets/images/lidar_ground.png";
+import lidar_greenery from "@/assets/images/lidar_greenery.png";
+import lidar_convolution from "@/assets/images/lidar_convolution.png";
+import nrg_diff from "@/assets/images/nrg_diff.png";
+import lake_original from "@/assets/images/lake_original.png";
+import building_map_original from "@/assets/images/building_map_original.png";
+import lidar_log from "@/assets/images/lidar_log.png";
+import lidar_buildingmap from "@/assets/images/lidar_buildingmap.png";
+
 
 const imageMap: { [key: string]: any } = {
     "icon": icon,
-    "black": black,
-    "purple": purple,
-    "orange": orange,
-    'map_after': map_after,
+    "original_satellite": original_satellite,
+    "front_lidar": front_lidar,
+    "front_nrg": front_nrg,
+    "lidar_basic_threshold": lidar_basic_threshold,
+    "lidar_ground": lidar_ground,
+    "lidar_greenery": lidar_greenery,
+    "lidar_convolution": lidar_convolution,
+    "nrg_diff": nrg_diff,
+    "lake_original": lake_original,
+    "building_map_original": building_map_original,
+    "lidar_log": lidar_log,
+    "lidar_buildingmap": lidar_buildingmap,
 };
 
 type MapButtonsColumnProps = {
