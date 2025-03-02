@@ -14,7 +14,6 @@ export default function Index() {
       contentContainerStyle={[styles.root]}
     >
       <HeroCarousel />
-      <p style={styles.gap}></p>
       <Text style={styles.title}>Map</Text>
       <Map />
       <p style={styles.gap}></p>
@@ -48,6 +47,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   gap: {
-    marginBottom: "1%"
+    marginBottom: "100%"
   }
 });

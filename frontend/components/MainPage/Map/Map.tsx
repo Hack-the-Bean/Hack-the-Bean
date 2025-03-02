@@ -1,26 +1,43 @@
-import { 
-    StyleSheet,
-    View
-} from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import MapButtonsColumn from './MapButtons/MapButtonsColumn';
 import Slider1 from '@/components/MainPage/Slider/Slider1';
 
 export default function Map() {
-  return (
-    <View
-        style={[styles.root]}
-    >
-        <MapButtonsColumn columnTitle='Left Image' />
-        <div style={styles.slider}>
-            <Slider1 
-                testText = {"this is a test"} 
-                frontSource={'../assets/assets/images/map_after.png'} 
-                backSource={'../assets/assets/images/map_before.png'} 
+    const [frontSource, setFrontSource] = useState('map_after.png');
+    const [backSource, setBackSource] = useState('map_after.png');
+
+    const handleFrontChange = (newImage: string) => {
+        setFrontSource(newImage);
+    };
+
+    const handleBackChange = (newImage: string) => {
+        setBackSource(newImage);
+    };
+
+    return (
+        <View style={[styles.root]}>
+            <MapButtonsColumn 
+                columnTitle='Left Image' 
+                nameTuple={['orange','purple','black']} 
+                imageTuple={['orange','purple','black']} 
+                onImagePress={handleFrontChange}
             />
-        </div>
-        <MapButtonsColumn columnTitle='Right Image' />
-    </View>
-  );
+            <div style={styles.slider}>
+                <Slider1 
+                    testText={"this is a test"} 
+                    frontSource={'../assets/assets/images/' + frontSource} 
+                    backSource={'../assets/assets/images/' + backSource} 
+                />
+            </div>
+            <MapButtonsColumn 
+                columnTitle='Right Image' 
+                nameTuple={['orange','purple','black','map_after']} 
+                imageTuple={['orange','purple','black', 'map_after']} 
+                onImagePress={handleBackChange}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
