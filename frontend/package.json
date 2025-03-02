@@ -37,6 +37,7 @@
     "react-compare-slider": "^3.1.0",
     "react-dom": "18.3.1",
     "react-native": "^0.76.7",
+    "react-native-3d-model-view": "^1.2.0",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-hoverable": "^0.2.0",
     "react-native-reanimated": "~3.16.1",
