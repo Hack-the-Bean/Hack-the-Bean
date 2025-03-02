@@ -22,7 +22,7 @@ export default function Map() {
             case 'front_lidar.png':
                 return ['lidar_basic_threshold','lidar_ground','lidar_greenery','lidar_convolution'];
             case 'front_nrg.png':
-                return ['nrg_diff','original_satellite','front_lidar'];
+                return ['original_satellite','nrg_diff'];
             default:
                 return ['lake_original','lidar_buildingmap','building_map_original','lidar_log'];
         }
@@ -87,6 +87,8 @@ export default function Map() {
                 return 'lidar convolution';
             case 'nrg_diff.png':
                 return 'nrg difference';
+            case 'original_satellite.png':
+                return 'original satellite image';
             default:
                 return 'lake masking';
         }
