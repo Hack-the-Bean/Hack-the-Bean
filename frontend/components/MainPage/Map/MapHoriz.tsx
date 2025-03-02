@@ -50,8 +50,8 @@ export default function Map() {
                 <div style={styles.slider}>
                     <Slider1 
                         testText = {"this is a test"} 
-                        frontSource={'../assets/assets/images/' + frontSourcer} 
-                        backSource={'../assets/assets/images/' + backSourcer} 
+                        frontSource={'../assets/assets/images/scaling/' + frontSourcer} 
+                        backSource={'../assets/assets/images/scaling/' + backSourcer} 
                     />
                 </div>
                 <MapButtonsRow 
