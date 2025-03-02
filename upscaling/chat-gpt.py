@@ -1,67 +1,49 @@
+import rasterio
+import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import numpy as np
-from PIL import Image as im
-import rasterio
-from osgeo import gdal
 
-# Load satellite image
+# Load the satellite image (JPG)
 satellite_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\satellite.jpg"
-img = cv2.imread(satellite_path)
+sat_img = cv2.imread(satellite_path)
+sat_img = cv2.cvtColor(sat_img, cv2.COLOR_BGR2RGB)
+sat_height, sat_width, _ = sat_img.shape
 
-# Convert BGR to RGB
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
-# Load LiDAR GeoTIFF
+# Load the LiDAR DEM (TIFF)
 lidar_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\lidar.tif"
-with rasterio.open(lidar_path) as lidar:
-    lidar_data = lidar.read(1)  # Read the first band (elevation)
+with rasterio.open(lidar_path) as dem_src:
+    dem = dem_src.read(1)  # DEM is single-band
+    dem_meta = dem_src.meta
 
-# Normalize LiDAR data to 0-255
-lidar_data = cv2.normalize(lidar_data, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
+# Resize DEM to match the satellite image resolution
+resized_dem = cv2.resize(dem, (sat_width, sat_height), interpolation=cv2.INTER_CUBIC)
 
-# Resize LiDAR to match satellite image dimensions
-lidar_resized = cv2.resize(lidar_data, (img_rgb.shape[1], img_rgb.shape[0]))
+# Fix NaNs in DEM
+resized_dem = np.nan_to_num(resized_dem, nan=0.0)  # Replace NaNs with 0
 
-# **Method 1: Use LiDAR as a Contrast Modifier (Multiply with RGB)**
-# Convert LiDAR to float for processing
-lidar_float = lidar_resized.astype(np.float32) / 255.0
+# Normalize DEM to 0–255 range using float32
+resized_dem = (255.0 * (resized_dem - resized_dem.min()) / (resized_dem.max() - resized_dem.min())).astype(np.float32)
 
-# Enhance RGB with LiDAR (element-wise multiplication)
-img_fused = (img_rgb.astype(np.float32) * (1 + lidar_float[:, :, np.newaxis])).clip(0, 255).astype(np.uint8)
+# Ensure DEM values are within the 0-255 range
+resized_dem = np.clip(resized_dem, 0, 255)
 
-# Load EDSR model
-sr = cv2.dnn_superres.DnnSuperResImpl_create()
-model_path = "C:\\Users\\lyleb\\Documents\\Uni Stuff\\4th Year\\ASR\\Hack-the-Bean\\upscaling\\EDSR_x4.pb"
-sr.readModel(model_path)
-sr.setModel("edsr", 4)
+# Convert DEM to uint8 for stacking with RGB image
+resized_dem_uint8 = resized_dem.astype(np.uint8)
 
-# Super-resolve image (3-channel required)
-result = sr.upsample(img_fused)
+# Stack the satellite and LiDAR data
+merged_data = np.dstack((sat_img, resized_dem_uint8))  # (H, W, 4) -> RGB + DEM
 
-# Convert result to uint8 format
-result_image = np.clip(result, 0, 255).astype(np.uint8)
+# Save the merged image as a GeoTIFF
+with rasterio.open("merged.tif", "w", driver="GTiff",
+                   height=sat_height, width=sat_width,
+                   count=4, dtype=np.uint8, crs=dem_meta["crs"],
+                   transform=dem_meta["transform"]) as dst:
+    for i in range(3):  # Write RGB channels
+        dst.write(sat_img[:, :, i], i + 1)  # RGB as uint8
+    dst.write(resized_dem_uint8, 4)  # DEM as uint8
 
-# Save images
-im.fromarray(result_image).save("upscaling\\EDSR_upscaled_satellite.png")
-im.fromarray(img_rgb).save("upscaling\\original_satellite.png")
-
-# Save as GeoTIFF
-with rasterio.open(lidar_path) as src:
-    meta = src.meta.copy()
-    meta.update({"height": result_image.shape[0], "width": result_image.shape[1], "count": 3})
-
-    with rasterio.open("upscaling\\upscaled_satellite.tif", "w", **meta) as dest:
-        for i in range(3):  # Save RGB channels
-            dest.write(result_image[:, :, i], i + 1)
-
-# Display images
-plt.figure(figsize=(10, 4))
-plt.subplot(1, 2, 1)
-plt.imshow(img_rgb)
-plt.title("Original Image")
-
-plt.subplot(1, 2, 2)
-plt.imshow(result_image)
-plt.title("Upscaled Image")
+# Display the merged image
+plt.figure(figsize=(10, 10))
+plt.imshow(merged_data)
+plt.title("Merged Image")
 plt.show()
