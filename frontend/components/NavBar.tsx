@@ -17,8 +17,9 @@ const NavBar: React.FC = () => {
                 <TouchableOpacity>
                     <Image 
                         source={require('@/assets/images/bean.png')}
-                        style={[styles.navImgImg, {width: 90, height: 90}]}
+                        style={[styles.navImgImg, {width: 65, height: 65}]}
                     />
+                    <Text style={{color: 'white', fontSize: 35, position: 'absolute', top: 10, left: 90}}>HackTheBean</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.navItems}>
@@ -38,7 +39,7 @@ const NavBar: React.FC = () => {
 
 const styles = StyleSheet.create({
     navbar: {
-        height: "15%",
+        height: "10%",
         backgroundColor: 'rgba(0, 0, 0, 0.9)',
         flexDirection: 'row',
         justifyContent: 'space-between',
