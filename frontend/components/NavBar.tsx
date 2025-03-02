@@ -24,13 +24,13 @@ const NavBar: React.FC = () => {
             </View>
             <View style={styles.navItems}>
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('index')}>
-                    <Text style={styles.navText}>Category Detection</Text>
+                    <Text style={styles.navText}>Home</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('upscale')}>
                     <Text style={styles.navText}>Image Upscaling</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('about')}>
-                    <Text style={styles.navText}>About</Text>
+                <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('category')}>
+                    <Text style={styles.navText}>Category Detection</Text>
                 </TouchableOpacity>
             </View>
         </View>

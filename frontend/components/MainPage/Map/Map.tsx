@@ -101,6 +101,7 @@ export default function Map() {
         setTextUse(getTextFromFrontSource(newImage));
         setTopText(getTopTextFromFrontSource(newImage));
         setBackSource(getNamesFromFrontSource(newImage)[0] + '.png');
+        setBottomText(getBottomTextFromBackSource(getNamesFromFrontSource(newImage)[0] + '.png'));
     };
 
     const handleBackChange = (newImage: string) => {
