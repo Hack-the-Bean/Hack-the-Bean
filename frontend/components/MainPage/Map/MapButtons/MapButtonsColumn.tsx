@@ -1,6 +1,7 @@
 import { 
     StyleSheet,
-    Text
+    Text,
+    View
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
 
@@ -10,7 +11,7 @@ type MapButtonsColumnProps = {
 
 export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
     return (
-        <div style={styles.column}>
+        <View style={styles.column}>
             <Text style={styles.text}>{props.columnTitle}</Text>
             <MapChangeButton
                 imageSource={require("@/assets/images/icon.png")}
@@ -20,7 +21,7 @@ export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
                 imageSource={require("@/assets/images/icon.png")}
                 onPress={() => console.log("zoom out")}
             />
-        </div>
+        </View>
     );
 };
 
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
         top: 0,
         right: 0,
         margin: 10,
+        flex: 1,
     },
     text: {
         color: "white",

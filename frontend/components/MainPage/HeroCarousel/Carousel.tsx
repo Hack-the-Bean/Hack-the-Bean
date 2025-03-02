@@ -29,7 +29,7 @@ export default function HeroCarousel() {
         const animationSequence = () => {
             Animated.timing(scrollX, {
                 toValue: -IMAGE_WIDTH * carouselImages.length,
-                duration: carouselImages.length * 6000,
+                duration: carouselImages.length * 10000,
                 easing: Easing.linear,
                 useNativeDriver: true,
             }).start(() => {
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: "100%",
+        opacity: 0.5,
     },
     textOverlay: {
         position: "absolute",
