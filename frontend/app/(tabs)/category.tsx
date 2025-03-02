@@ -5,28 +5,9 @@ import {
   StyleSheet,
   ScrollView
 } from "react-native";
-import Video, { VideoRef } from "react-native-video";
 import React, { useRef } from "react";
 import Map from "@/components/MainPage/Map/Map";
 import HeroCarousel from "@/components/MainPage/HeroCarousel/Carousel";
-
-const VideoPlayer = () => {
-  const videoRef = useRef<VideoRef>(null);
-  const background = require("@/assets/lidar1.mp4");
-
-  return (
-    <Video
-      source={background}
-      ref={videoRef}
-      style={styles.backgroundVideo}
-      resizeMode="cover"
-      repeat={true}
-      muted={true}
-      paused={false}
-      playInBackground={false}
-    />
-  )
-}
 
 export default function Index() {
   return (
