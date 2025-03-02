@@ -81,7 +81,7 @@ export default function HeroCarousel() {
 
 const styles = StyleSheet.create({
     heroContainer: {
-        height: 800,
+        height: 700,
         width: "100%",
         position: "relative",
         overflow: "hidden",
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: "100%",
-        opacity: 0.5,
+        opacity: 0.6,
     },
     textOverlay: {
         position: "absolute",

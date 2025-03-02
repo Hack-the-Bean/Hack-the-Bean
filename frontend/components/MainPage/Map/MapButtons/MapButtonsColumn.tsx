@@ -51,7 +51,7 @@ export default function MapButtonsColumn( props: MapButtonsColumnProps ) {
                     key={index}
                     imageSource={imageMap[props.imageTuple[index]] || icon}
                     onPress={() => {
-                        console.log(`${name} pressed`);
+                        console.log(`${name} pressed`, props.imageTuple);
                         props.onImagePress(props.imageTuple[index] + '.png');
                     }}
                     label={props.nameTuple[index]}
