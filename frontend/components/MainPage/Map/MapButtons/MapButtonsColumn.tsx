@@ -4,7 +4,7 @@ import {
     View
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
-import icon from "@/assets/images/icon.png";
+import icon from "@/assets/images/empty.png";
 import original_satellite from "@/assets/images/original_satellite.png";
 import front_lidar from "@/assets/images/front_lidar.png";
 import front_nrg from "@/assets/images/front_nrg.png";

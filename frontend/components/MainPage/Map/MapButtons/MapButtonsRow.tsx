@@ -6,7 +6,7 @@ import {
 import { useState } from 'react';
 
 import MapChangeButton from "./MapChangeButton";
-import icon from "@/assets/images/icon.png";
+import icon from "@/assets/images/empty.png";
 import original_satellite from "@/assets/images/scaling/original_satellite.png";
 import small from "@/assets/images/scaling/small_after.png";
 import lidar from "@/assets/images/scaling/lidar_after.png";
