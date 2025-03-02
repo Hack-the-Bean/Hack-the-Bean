@@ -2,7 +2,8 @@ import {
     StyleSheet,
     View,
     ScrollView,
-    Text
+    Text,
+    TouchableOpacity
 } from 'react-native';
 import { useState } from 'react';
 import MapButtonsRow from './MapButtons/MapButtonsRow';
@@ -12,30 +13,26 @@ export default function Map() {
     const [frontSourcer] = useState('original_satellite.png');
     const [backSourcer, setBackSourcer] = useState('small_after.png');
 
-    const [textUse, setTextUse] = useState(['Information about Upscaling\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'])
+    const [textUse, setTextUse] = useState(['EMPTY']);
 
     const handleBackChange = (newImage: string) => {
         setBackSourcer(newImage);
-        // setTextUse(getTextFromFrontSource(newImage));
     };
 
-    // const getTextFromFrontSource = (frontImage : string) => {
-    //     console.log(frontImage);
-    //     switch (frontImage) {
-    //         case 'small_after.png':
-    //             return ['Information about 4x upscale\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'];
-    //         case 'lidar_after.png':
-    //             return ['Information about 4x upscale with lidar\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'];
-    //         case 'logged_after.png':
-    //             return ['Information about 4x upscale with logged lidar\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'];
-    //         case 'BIGlogged_after.png':
-    //             return ['Information about 16x upscale with logged lidar\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'];
-    //         default:
-    //             return ['Information about 4x upscale\n\nNullam inceptos ligula neque per porta nibh. Dapibus enim potenti tellus curae ex? Odio tortor etiam sollicitudin sed parturient duis lacus. Cubilia primis porta tellus facilisis lacinia ornare. Commodo dictum enim consectetur elementum; ligula et pretium etiam efficitur. Sodales consectetur magnis morbi cubilia in nisl ante donec. Molestie luctus ipsum duis suscipit penatibus dui sociosqu. Rhoncus ante pretium gravida platea vehicula ex class penatibus natoque. Molestie blandit auctor quam dis nisi laoreet venenatis? Taciti penatibus blandit porttitor bibendum ipsum vulputate. Per sollicitudin porttitor accumsan metus himenaeos lectus faucibus laoreet. Pulvinar leo neque hac bibendum phasellus tortor eros mi. Curae adipiscing massa porta dictumst ligula turpis scelerisque. Venenatis proin potenti blandit inceptos sem. Est praesent mi primis molestie; ut ullamcorper pulvinar augue mollis. Consequat porta mauris vulputate facilisi etiam sit. Leo platea ante nam platea urna consectetur nulla elementum. Adipiscing ac varius urna lobortis potenti quisque semper malesuada? Adipiscing ipsum sociosqu ridiculus elit consequat mauris cursus. Venenatis natoque nulla sagittis ligula vel etiam hendrerit primis venenatis. Donec mattis suscipit pretium finibus nec nostra lectus proin leo. Turpis ex tristique semper erat imperdiet mi vel. Suscipit mollis mauris commodo sodales tristique accumsan.'];
-    //     }
-        
-    // };
 
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const textArray = [
+        "The first step in this process was deciding which model to use to upscale. We knew that we wanted to use OpenCV, however we had multiple models to choose from. After doing some research, the choices were between LapSRN and EDSR. These are relatively small and simple models, which can be somewhat easily implemented and can be used with both .tif and .jpg files. We initially thought that LapSRN would be the best, as it had the highest level of upscaling, x8, while the other had x4, however it turned out that EDSR was better in dealing with satellite data.",
+         "After selecting our model, we had to design methods to upscale the jpg. The first method was to simply upscale the jpg. This involved reading the jpg converting it to RGB and using OpenCV’s DNN feature to upscale the image. The result was noticeable, but not as good as we would have hoped for.",
+         "The next plan was to incorporate the lidar data to assist the upscaling. We used rasterio to read the lidar.tif, resizing it to match the image, and converting to floats to do element wise multiplication to fuse it with the satellite data. The result from this was a large jump in quality, however it had some issues. There were some artifacting, and the brightness was much too high. To deal with this, we decided to transform the lidar data into the log scale before resizing and additionally doing some processing to remove 0 values and the artifacting. This ended up much better. ",
+         "With no artifacting, and a more reasonable colouring. The next step was to experiment with a second layer of upscaling. For this, the original satellite image was upscaled by 4x, and then the lidar data was logged, and resized to match the upscaled satellite data. after they were fused, it was upscaled another 4x. This in total took over 20 minutes and gained results that were not noticeably better than the 4x upscaling with logged lidar data."];
+
+    const handleIndexChange = (step: number) => {
+    const newIndex = currentIndex + step;
+    if (newIndex >= 0 && newIndex < textArray.length) {
+        setCurrentIndex(newIndex);
+    }
+};
 
 
 
@@ -60,9 +57,20 @@ export default function Map() {
                     imageTuple={['small','lidar','logged','BIGlogged']} 
                     onImagePress={handleBackChange}/>
             </View>
-            <Text style={styles.text}>
-                        {textUse}
+            <Text style={styles.bigText}>
+                Our upscaling journey...
             </Text>
+            <View style={styles.carouselContainer}>
+            <Text>
+                <TouchableOpacity onPress={() => handleIndexChange(-1)}><Text style={styles.arrowLeft}>←</Text></TouchableOpacity>
+                </Text>   
+                <Text style={styles.carouselText}>
+                {"("+(currentIndex+1)+"/"+textArray.length+")\n" + textArray[currentIndex]}
+                </Text>
+                <Text>
+                <TouchableOpacity onPress={() => handleIndexChange(1)}><Text style={styles.arrowRight}>→</Text></TouchableOpacity>
+                </Text>    
+            </View>
         </ScrollView>
   );
 }
@@ -74,6 +82,33 @@ const styles = StyleSheet.create({
         height: '65vh',
         top: '1vh',
     },
+    carouselContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      carouselText: {
+        color: "#fff",
+        fontSize: 25,
+        textAlign: "center",
+        paddingBottom: 40,
+      },
+      arrowRight: {
+        color: "#fff",
+        fontSize: 50,
+        textAlign: "center",
+        paddingBottom: 40,
+        paddingRight: 100,
+        paddingLeft: 50,
+      },
+      arrowLeft: {
+        color: "#fff",
+        fontSize: 50,
+        textAlign: "center",
+        paddingBottom: 40,
+        paddingRight: 50,
+        paddingLeft: 100,
+      },
     slider: {
         display: 'flex',
         justifyContent: 'center',
@@ -91,5 +126,12 @@ const styles = StyleSheet.create({
       textAlign: "center",
       marginBottom: 20,
       marginTop: 200,
-    }
+    },
+    bigText: {
+        color: "#fff",
+        fontSize: 30,
+        textAlign: "center",
+        marginBottom: 20,
+        marginTop: 200,
+      }
 })
