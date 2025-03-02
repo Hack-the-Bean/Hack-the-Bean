@@ -5,17 +5,19 @@ import {
 } from "react-native";
 import MapChangeButton from "./MapChangeButton";
 import icon from "@/assets/images/icon.png";
-import black from "@/assets/images/black.png";
-import purple from "@/assets/images/purple.png";
-import orange from "@/assets/images/orange.png";
-import map_after from "@/assets/images/map_after.png";
+import original_satellite from "@/assets/images/original_satellite.png";
+import small from "@/assets/images/small_after.png";
+import lidar from "@/assets/images/lidar_after.png";
+import logged from "@/assets/images/logged_after.png";
+import BIGlogged from "@/assets/images/BIGlogged_after.png";
 
 const imageMap: { [key: string]: any } = {
     "icon": icon,
-    "black": black,
-    "purple": purple,
-    "orange": orange,
-    'map_after': map_after,
+    "original_satellite": original_satellite,
+    "small": small,
+    "lidar": lidar,
+    "logged": logged,
+    "BIGlogged": BIGlogged,
 };
 
 type MapButtonsColumnProps = {

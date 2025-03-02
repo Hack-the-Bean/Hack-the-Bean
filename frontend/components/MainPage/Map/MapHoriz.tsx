@@ -7,8 +7,8 @@ import MapButtonsRow from './MapButtons/MapButtonsRow';
 import Slider1 from '@/components/MainPage/Slider/Slider1';
 
 export default function Map() {
-    const [frontSourcer] = useState('map_after.png');
-    const [backSourcer, setBackSourcer] = useState('map_after.png');
+    const [frontSourcer] = useState('original_satellite.png');
+    const [backSourcer, setBackSourcer] = useState('small_after.png');
 
     const handleBackChange = (newImage: string) => {
         setBackSourcer(newImage);
@@ -29,7 +29,7 @@ export default function Map() {
             <MapButtonsRow 
                 rowTitle='Below image' 
                 nameTuple={['4x upscale','4x upscale with lidar','4x upscale with logged lidar','16x upscale with logged lidar']} 
-                imageTuple={['orange','purple']} 
+                imageTuple={['small','lidar','logged','BIGlogged']} 
                 onImagePress={handleBackChange}/>
         </View>
   );
